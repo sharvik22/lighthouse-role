@@ -36,7 +36,7 @@
 9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
 10. Выложите playbook в репозиторий.
 11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.  
-[playbook]()
+[playbook](https://github.com/smabramov/08-ansible-04-role.git)
 [clickhouse](https://github.com/smabramov/clickhouse-role.git)  
 [lighthouse](https://github.com/smabramov/lighthouse-role.git)    
 [vector](https://github.com/smabramov/vector-role.git)  
