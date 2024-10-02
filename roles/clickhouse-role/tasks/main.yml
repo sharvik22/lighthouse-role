@@ -1,5 +1,4 @@
 ---
-# tasks file for clickhouse-role
 - name: Get packages
   block:
     - name: Get clickhouse distrib
@@ -22,7 +21,6 @@
       - clickhouse-client-{{ clickhouse_version }}.rpm
       - clickhouse-server-{{ clickhouse_version }}.rpm
   notify: Start clickhouse service
-# Настройка конфига clickhouse
 - name: Deploy config clickhouse
   ansible.builtin.template:
     src: clickhouse.config.j2
@@ -31,7 +29,6 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
   become: true
-# Настройка конфига пользователей clickhouse
 - name: Deploy users config clickhouse
   ansible.builtin.template:
     src: clickhouse.users.j2
@@ -40,20 +37,16 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
   become: true
-# Принудительное использование handlers
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
-# Задержка после рестарта сервера, чтобы успел запустится
 - name: Delay 5 sec
   ansible.builtin.pause:
     seconds: 5
-# Создание БД для хранения логов
 - name: Create database
   ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
   register: create_db
   failed_when: create_db.rc != 0 and create_db.rc !=82
   changed_when: create_db.rc == 0
-# Создание таблицы для хранения логов одной строкой
 - name: Create table for logs
   ansible.builtin.command: "clickhouse-client -q
                         'CREATE TABLE IF NOT EXISTS  logs.vector_internal_logs (
@@ -63,4 +56,3 @@
                         ORDER BY tuple();'" #don't need sorting
   register: create_table
   changed_when: false
-  

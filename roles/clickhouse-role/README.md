@@ -1,54 +1,30 @@
-Role Name
+clickhouse
 =========
 
-Роль для установки clickhouse.
-- Установка:
-  - clickhouse-client
-  - clickhouse-server
-  - clickhouse-common-static
-- Создаётся БД
-- Создаётся таблица для логов
-- Создаётся пользователь для записи в БД
-- Конфигурируется clickhouse-server для работы внешних подключений
-
-Requirements
-------------
+Install  clickhouse 
 
 Role Variables
 --------------
 
-Переменные для установки кредов
-default/main.yml:
-```yaml
-clickhouse_user: netology
-clickhouse_password: netology
-```
+| vars                     | description                   |
+|------------------------- |-------------------------------|
+| {clickhouse_version}     | version clickhouse to install |
+| {clickhouse_user}        |            netology           |
+| {clickhouse_password}    |            netology           |
+| {clickhouse_config_path} |   These are variables that point to the paths to the ClickHouse server configuration files | 
+| {clickhouse_users_path } |  These are variables that point to the paths to the ClickHouse server configuration files  |
 
-Переменные для установки необходимых пакетов и конфигурационных файлов clickhouse
-vars/main.yml
-```yaml
-clickhouse_version: "22.3.3.44"
-clickhouse_packages:
-  - clickhouse-client
-  - clickhouse-server
-  - clickhouse-common-static
-clickhouse_config_path: /etc/clickhouse-server/config.xml
-clickhouse_users_path: /etc/clickhouse-server/users.xml
-```
 
-Dependencies
-------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-```yaml
-hosts: clickhouse
-roles:
-  - role: clickhouse-role
-```
+Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+
+    - hosts: servers
+      roles:
+         - { role: clickhouse }
 
 License
 -------
@@ -57,3 +33,4 @@ MIT
 
 Author Information
 ------------------
+Viktor Sharapat
